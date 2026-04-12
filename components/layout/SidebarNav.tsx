@@ -22,7 +22,7 @@ export default function SidebarNav() {
 
   return (
     <aside className="flex w-56 flex-col border-r border-white/10 bg-[#121212]">
-      <div className="flex-1 p-5">
+      <div className="p-5">
         <div className="space-y-8">
           <div>
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Main</p>
