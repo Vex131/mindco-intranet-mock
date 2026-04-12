@@ -26,7 +26,7 @@ export default function SidebarNav() {
         <div className="space-y-8">
           <div>
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Main</p>
-            <nav className="space-y-2">
+            <nav className="space-y-1">
               {mainNav.map((item) => {
                 const active = pathname === item.href;
 
@@ -34,7 +34,7 @@ export default function SidebarNav() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    className={`block rounded-xl px-3 py-2.5 text-[14px] transition ${
+                    className={`block rounded-xl px-3 py-1.5 text-[14px] transition ${
                       active ? "bg-white/10 text-white" : "text-white/65 hover:bg-white/5 hover:text-white"
                     }`}
                   >
@@ -46,7 +46,7 @@ export default function SidebarNav() {
               {role === "Admin" ? (
                 <Link
                   href="/admin"
-                  className={`block rounded-2xl px-4 py-3 text-sm transition ${
+                  className={`block rounded-2xl px-4 py-1.5 text-sm transition ${
                     pathname === "/admin"
                       ? "bg-[#FF3B3F]/15 text-white"
                       : "text-white/65 hover:bg-white/5 hover:text-white"
@@ -69,7 +69,7 @@ export default function SidebarNav() {
                   <Link
                     key={dept.name}
                     href={href}
-                    className={`block rounded-2xl px-4 py-3 text-sm transition ${
+                    className={`block rounded-2xl px-4 py-1.5 text-sm transition ${
                       active ? "bg-[#3FA7D6]/15 text-white" : "text-white/65 hover:bg-white/5 hover:text-white"
                     }`}
                   >
@@ -102,7 +102,7 @@ export default function SidebarNav() {
       <div className="border-t border-white/10 p-4">
         <Link
           href="/profile"
-          className={`flex items-center gap-2.5 rounded-xl p-2.5 transition ${
+          className={`flex items-center gap-2.5 rounded-xl p-1.5 transition ${
             pathname === "/profile" ? "bg-white/10" : "bg-white/5 hover:bg-white/10"
           }`}
         >
@@ -111,7 +111,7 @@ export default function SidebarNav() {
           </div>
           <div className="min-w-0">
             <p className="truncate text-sm font-medium text-white">Naavil</p>
-            <p className="truncate text-[11px] text-white/50">Product Designer • {role}</p>
+            <p className="text-[11px] text-white/50">Product Designer • {role}</p>
           </div>
         </Link>
       </div>
