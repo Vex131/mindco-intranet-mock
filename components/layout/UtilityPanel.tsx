@@ -1,13 +1,45 @@
 "use client";
 
 import {usePathname} from "next/navigation";
-import {departmentUtilityData, directMessageUtilityData, globalUtilityData} from "@/lib/mockData";
+import {departmentUtilityData, globalUtilityData, messageThreads, messageUtilityData} from "@/lib/mockData";
 
-function Card({title, children}: {title: string; children: React.ReactNode}) {
+function PanelShell({children}: {children?: React.ReactNode}) {
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/5 p-4">
-      <p className="text-sm font-semibold text-white">{title}</p>
+    <aside className="h-full w-80 overflow-y-auto border-l border-white/10 bg-[#121212] p-5 hide-scrollbar">
+      <div className="space-y-4">{children}</div>
+    </aside>
+  );
+}
+
+function SectionCard({title, children}: {title: string; children: React.ReactNode}) {
+  return (
+    <section className="rounded-[24px] border border-white/10 bg-[#171717] p-4">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/35">{title}</p>
       <div className="mt-4">{children}</div>
+    </section>
+  );
+}
+
+function ItemCard({title, meta}: {title: string; meta?: string}) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-black/20 p-3 transition hover:bg-white/[0.03]">
+      <p className="text-sm text-white">{title}</p>
+      {meta ? <p className="mt-1 text-xs text-white/45">{meta}</p> : null}
+    </div>
+  );
+}
+
+function HeaderCard({label, name, avatarLabel}: {label: string; name: string; avatarLabel: string}) {
+  return (
+    <section className="rounded-[28px] border border-white/10 bg-[#171717] p-5">
+      <div className="flex flex-col items-center text-center">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/10 text-xl font-semibold text-white">
+          {avatarLabel}
+        </div>
+
+        <h3 className="mt-4 text-2xl font-semibold text-white">{name}</h3>
+        <p className="mt-1 text-sm text-white/45">{label}</p>
+      </div>
     </section>
   );
 }
@@ -20,53 +52,111 @@ export default function UtilityPanel() {
 
   if (isMessages) {
     const slug = pathname.split("/")[2];
-    const data = directMessageUtilityData[slug as keyof typeof directMessageUtilityData];
+    const thread = messageThreads.find((item) => item.slug === slug);
+    const data = messageUtilityData[slug as keyof typeof messageUtilityData];
 
-    if (!data) {
-      return <aside className="w-80 border-l border-white/10 bg-[#121212] p-5" />;
+    if (!thread || !data) {
+      return <PanelShell />;
+    }
+
+    if (data.type === "group") {
+      return (
+        <PanelShell>
+          <HeaderCard
+            label={data.label}
+            name={thread.name}
+            avatarLabel={thread.avatarLabel ?? thread.name.slice(0, 2)}
+          />
+
+          <SectionCard title="Members">
+            <div className="space-y-3">
+              {data.members.map((member) => (
+                <div
+                  key={member.name}
+                  className="flex items-center justify-between rounded-2xl bg-white/[0.03] px-3 py-2.5"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-xs font-medium text-white">
+                      {member.name.charAt(0)}
+                    </div>
+
+                    <div>
+                      <p className="text-sm text-white">{member.name}</p>
+                      <p className="text-xs text-white/45">{member.role}</p>
+                    </div>
+                  </div>
+
+                  {member.online ? <span className="h-2.5 w-2.5 rounded-full bg-white/60" /> : null}
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+
+          <SectionCard title="Media">
+            <div className="grid grid-cols-3 gap-2">
+              {data.media.map((item) => (
+                <div
+                  key={item}
+                  className="aspect-square rounded-2xl border border-white/10 bg-white/[0.04] p-2 text-[10px] leading-4 text-white/60"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+
+          <SectionCard title="Links">
+            <div className="space-y-3">
+              {data.links.map((item) => (
+                <ItemCard
+                  key={item.label}
+                  title={item.label}
+                  meta={item.href}
+                />
+              ))}
+            </div>
+          </SectionCard>
+        </PanelShell>
+      );
     }
 
     return (
-      <aside className="w-80 border-l border-white/10 bg-[#121212] p-5">
-        <div className="space-y-5">
-          <Card title="Contact Details">
-            <div className="space-y-3 text-sm text-white/70">
-              <p>
-                <span className="text-white">Role:</span> {data.role}
-              </p>
-              <p>
-                <span className="text-white">Status:</span> {data.status}
-              </p>
-            </div>
-          </Card>
+      <PanelShell>
+        <HeaderCard
+          label={data.role}
+          name={thread.name}
+          avatarLabel={thread.avatarLabel ?? thread.name.charAt(0)}
+        />
 
-          <Card title="Shared Files">
-            <div className="space-y-3">
-              {data.sharedFiles.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl bg-black/20 p-3"
-                >
-                  <p className="text-sm text-white">{item}</p>
-                </div>
-              ))}
-            </div>
-          </Card>
+        <SectionCard title="Contact Details">
+          <div className="space-y-3">
+            <ItemCard title={`Role: ${data.role}`} />
+            <ItemCard title={`Status: ${data.status}`} />
+          </div>
+        </SectionCard>
 
-          <Card title="Recent Media">
-            <div className="space-y-3">
-              {data.recentMedia.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl bg-black/20 p-3"
-                >
-                  <p className="text-sm text-white">{item}</p>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </div>
-      </aside>
+        <SectionCard title="Shared Files">
+          <div className="space-y-3">
+            {data.sharedFiles.map((item) => (
+              <ItemCard
+                key={item}
+                title={item}
+              />
+            ))}
+          </div>
+        </SectionCard>
+
+        <SectionCard title="Recent Media">
+          <div className="space-y-3">
+            {data.recentMedia.map((item) => (
+              <ItemCard
+                key={item}
+                title={item}
+              />
+            ))}
+          </div>
+        </SectionCard>
+      </PanelShell>
     );
   }
 
@@ -75,91 +165,85 @@ export default function UtilityPanel() {
     const data = departmentUtilityData[departmentSlug as keyof typeof departmentUtilityData];
 
     if (!data) {
-      return <aside className="w-80 border-l border-white/10 bg-[#121212] p-5" />;
+      return <PanelShell />;
     }
 
     return (
-      <aside className="w-80 border-l border-white/10 bg-[#121212] p-5">
-        <div className="space-y-5">
-          <Card title="Pinned Notices">
-            <div className="space-y-3">
-              {data.pinned.map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-2xl bg-black/20 p-3"
-                >
-                  <p className="text-sm text-white">{item.title}</p>
-                  <p className="mt-1 text-xs text-white/45">{item.meta}</p>
-                </div>
-              ))}
-            </div>
-          </Card>
+      <PanelShell>
+        <SectionCard title="Pinned Notices">
+          <div className="space-y-3">
+            {data.pinned.map((item) => (
+              <ItemCard
+                key={item.title}
+                title={item.title}
+                meta={item.meta}
+              />
+            ))}
+          </div>
+        </SectionCard>
 
-          <Card title="Active Polls">
-            <div className="space-y-3">
-              {data.polls.map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-2xl bg-black/20 p-3"
-                >
-                  <p className="text-sm text-white">{item.title}</p>
-                  <p className="mt-1 text-xs text-white/45">{item.meta}</p>
-                </div>
-              ))}
-            </div>
-          </Card>
+        <SectionCard title="Active Polls">
+          <div className="space-y-3">
+            {data.polls.map((item) => (
+              <ItemCard
+                key={item.title}
+                title={item.title}
+                meta={item.meta}
+              />
+            ))}
+          </div>
+        </SectionCard>
 
-          <Card title="Upcoming">
-            <div className="space-y-3 text-sm text-white/70">
-              {data.events.map((item) => (
-                <p key={item}>{item}</p>
-              ))}
-            </div>
-          </Card>
-        </div>
-      </aside>
+        <SectionCard title="Upcoming">
+          <div className="space-y-3">
+            {data.events.map((item) => (
+              <ItemCard
+                key={item}
+                title={item}
+              />
+            ))}
+          </div>
+        </SectionCard>
+      </PanelShell>
     );
   }
 
   return (
-    <aside className="w-80 border-l border-white/10 bg-[#121212] p-5">
-      <div className="space-y-5">
-        <Card title="Pinned Notices">
-          <div className="space-y-3">
-            {globalUtilityData.pinned.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl bg-black/20 p-3"
-              >
-                <p className="text-sm text-white">{item.title}</p>
-                <p className="mt-1 text-xs text-white/45">{item.meta}</p>
-              </div>
-            ))}
-          </div>
-        </Card>
+    <PanelShell>
+      <SectionCard title="Pinned Notices">
+        <div className="space-y-3">
+          {globalUtilityData.pinned.map((item) => (
+            <ItemCard
+              key={item.title}
+              title={item.title}
+              meta={item.meta}
+            />
+          ))}
+        </div>
+      </SectionCard>
 
-        <Card title="Active Polls">
-          <div className="space-y-3">
-            {globalUtilityData.polls.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl bg-black/20 p-3"
-              >
-                <p className="text-sm text-white">{item.title}</p>
-                <p className="mt-1 text-xs text-white/45">{item.meta}</p>
-              </div>
-            ))}
-          </div>
-        </Card>
+      <SectionCard title="Active Polls">
+        <div className="space-y-3">
+          {globalUtilityData.polls.map((item) => (
+            <ItemCard
+              key={item.title}
+              title={item.title}
+              meta={item.meta}
+            />
+          ))}
+        </div>
+      </SectionCard>
 
-        <Card title="Upcoming">
-          <div className="space-y-3 text-sm text-white/70">
-            {globalUtilityData.events.map((item) => (
-              <p key={item}>{item}</p>
-            ))}
-          </div>
-        </Card>
-      </div>
-    </aside>
+      <SectionCard title="Upcoming">
+        <div className="space-y-3">
+          {globalUtilityData.events.map((item) => (
+            <ItemCard
+              key={item}
+              title={item}
+            />
+          ))}
+        </div>
+      </SectionCard>
+    </PanelShell>
   );
 }

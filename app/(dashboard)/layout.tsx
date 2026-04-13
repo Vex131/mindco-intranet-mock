@@ -24,10 +24,10 @@ function DashboardShell({children}: {children: React.ReactNode}) {
   const showMessagesMenu = pathname.startsWith("/messages");
 
   return (
-    <div className="min-h-screen bg-[#0F0F0F] text-[#F5F5F5]">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden bg-[#0F0F0F] text-[#F5F5F5]">
       <AppHeader />
 
-      <div className="flex min-h-[calc(100vh-4rem)]">
+      <div className="flex min-h-0 flex-1 overflow-hidden">
         <SidebarNav />
 
         {showMessagesMenu ? (
@@ -39,8 +39,8 @@ function DashboardShell({children}: {children: React.ReactNode}) {
           />
         ) : null}
 
-        <main className="min-w-0 flex-1 bg-[#111111]">
-          <div className="mx-auto max-w-6xl p-6">{children}</div>
+        <main className="min-w-0 flex-1 overflow-hidden bg-[#111111]">
+          <div className="mx-auto flex h-full min-h-0 max-w-6xl flex-col p-6">{children}</div>
         </main>
 
         <UtilityPanel />

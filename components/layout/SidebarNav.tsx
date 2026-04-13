@@ -5,15 +5,17 @@ import {usePathname} from "next/navigation";
 import {departments} from "@/lib/mockData";
 import {useRole} from "@/components/providers/RoleProvider";
 
-const mainNav = [
+const workspaceNav = [
   {label: "Home", href: "/home"},
   {label: "Announcements", href: "/announcements"},
   {label: "My Feed", href: "/feed"},
   {label: "Polls", href: "/polls"},
   {label: "Directory", href: "/directory"},
-  {label: "Gallery", href: "/gallery"},
-  {label: "Notifications", href: "/notifications"},
+];
+
+const communicationNav = [
   {label: "Direct Messages", href: "/messages"},
+  {label: "Gallery", href: "/gallery"},
 ];
 
 export default function SidebarNav() {
@@ -21,13 +23,14 @@ export default function SidebarNav() {
   const {role, setRole} = useRole();
 
   return (
-    <aside className="flex w-56 flex-col border-r border-white/10 bg-[#121212]">
-      <div className="p-5">
+    <aside className="flex h-full min-h-0 w-56 flex-col border-r border-white/10 bg-[#121212]">
+      <div className="min-h-0 flex-1 overflow-y-auto p-5 hide-scrollbar">
         <div className="space-y-8">
           <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Main</p>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Workspace</p>
+
             <nav className="space-y-1">
-              {mainNav.map((item) => {
+              {workspaceNav.map((item) => {
                 const active = pathname === item.href;
 
                 return (
@@ -46,9 +49,9 @@ export default function SidebarNav() {
               {role === "Admin" ? (
                 <Link
                   href="/admin"
-                  className={`block rounded-2xl px-4 py-1.5 text-sm transition ${
+                  className={`block rounded-xl px-3 py-1.5 text-[14px] transition ${
                     pathname === "/admin"
-                      ? "bg-[#FF3B3F]/15 text-white"
+                      ? "bg-[#FF3B3F]/12 text-white"
                       : "text-white/65 hover:bg-white/5 hover:text-white"
                   }`}
                 >
@@ -59,8 +62,31 @@ export default function SidebarNav() {
           </div>
 
           <div>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Communication</p>
+
+            <nav className="space-y-1">
+              {communicationNav.map((item) => {
+                const active = pathname === item.href;
+
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`block rounded-xl px-3 py-1.5 text-[14px] transition ${
+                      active ? "bg-white/10 text-white" : "text-white/65 hover:bg-white/5 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+
+          <div>
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Departments</p>
-            <div className="space-y-2">
+
+            <div className="space-y-1.5">
               {departments.map((dept) => {
                 const href = `/departments/${dept.name.toLowerCase()}`;
                 const active = pathname === href;
@@ -69,8 +95,8 @@ export default function SidebarNav() {
                   <Link
                     key={dept.name}
                     href={href}
-                    className={`block rounded-2xl px-4 py-1.5 text-sm transition ${
-                      active ? "bg-[#3FA7D6]/15 text-white" : "text-white/65 hover:bg-white/5 hover:text-white"
+                    className={`block rounded-xl px-3 py-1.5 text-[14px] transition ${
+                      active ? "bg-white/10 text-white" : "text-white/65 hover:bg-white/5 hover:text-white"
                     }`}
                   >
                     {dept.name}
@@ -82,6 +108,7 @@ export default function SidebarNav() {
 
           <div>
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">User Type</p>
+
             <div className="grid grid-cols-2 gap-2 rounded-2xl bg-white/5 p-1">
               {(["Employee", "Admin"] as const).map((item) => (
                 <button
@@ -106,7 +133,7 @@ export default function SidebarNav() {
             pathname === "/profile" ? "bg-white/10" : "bg-white/5 hover:bg-white/10"
           }`}
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#3FA7D6] text-sm font-medium text-white">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-sm font-medium text-white">
             N
           </div>
           <div className="min-w-0">

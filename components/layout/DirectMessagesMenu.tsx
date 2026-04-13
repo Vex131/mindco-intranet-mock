@@ -1,62 +1,172 @@
 "use client";
 
 import Link from "next/link";
+import {useMemo, useState} from "react";
 import {usePathname} from "next/navigation";
-import {directMessages} from "@/lib/mockData";
+import {messageMembers, messageThreads} from "@/lib/mockData";
 
 export default function DirectMessagesMenu() {
   const pathname = usePathname();
+  const [query, setQuery] = useState("");
+
+  const filteredMembers = useMemo(() => {
+    return messageMembers.filter((member) => member.name.toLowerCase().includes(query.toLowerCase()));
+  }, [query]);
+
+  const dmThreads = messageThreads.filter((thread) => thread.type === "dm");
+  const groupThreads = messageThreads.filter((thread) => thread.type === "group");
 
   return (
-    <aside className="w-56 border-r border-white/10 bg-[#101010] px-4 py-5">
+    <aside className="flex h-full w-72 flex-col overflow-hidden border-r border-white/10 bg-[#101010] px-4 py-5">
       <div className="mb-5">
         <p className="text-[11px] uppercase tracking-[0.18em] text-[#2EC4B6]">Messages</p>
         <h2 className="mt-1.5 text-[18px] font-semibold text-white">Direct Messages</h2>
       </div>
 
-      <div className="space-y-2">
-        {directMessages.map((person) => {
-          const href = `/messages/${person.slug}`;
-          const active = pathname === href;
+      <div className="space-y-3">
+        <input
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Search member to message..."
+          className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white outline-none placeholder:text-white/35"
+        />
 
-          return (
-            <Link
-              key={person.slug}
-              href={href}
-              className={`block rounded-xl px-3 py-2.5 text-left transition ${
-                active ? "bg-white/10" : "hover:bg-white/5"
-              }`}
-            >
-              <div className="flex items-start gap-3">
-                <div className="relative mt-0.5">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#3FA7D6] text-sm font-medium text-white">
-                    {person.name.charAt(0)}
+        <div className="grid grid-cols-2 gap-2">
+          <button className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10">
+            New DM
+          </button>
+          <button className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10">
+            Create Group
+          </button>
+        </div>
+      </div>
+      <div className="mt-5 min-h-0 flex-1 overflow-y-auto pr-1 hide-scrollbar">
+        {query ? (
+          <div className="mt-5">
+            <p className="mb-2 text-[11px] uppercase tracking-[0.16em] text-white/35">Members</p>
+
+            <div className="space-y-2">
+              {filteredMembers.map((member) => (
+                <Link
+                  key={member.slug}
+                  href={`/messages/${member.slug}`}
+                  className="block rounded-xl px-3 py-2.5 transition hover:bg-white/5"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="relative">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#3FA7D6] text-sm font-medium text-white">
+                        {member.name.charAt(0)}
+                      </div>
+                      {member.online ? (
+                        <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border border-[#101010] bg-[#2EC4B6]" />
+                      ) : null}
+                    </div>
+
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-medium text-white">{member.name}</p>
+                      <p className="truncate text-xs text-white/45">{member.role}</p>
+                    </div>
                   </div>
-                  {person.online ? (
-                    <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border border-[#101010] bg-[#2EC4B6]" />
-                  ) : null}
+                </Link>
+              ))}
+
+              {filteredMembers.length === 0 ? (
+                <div className="rounded-xl border border-dashed border-white/10 px-3 py-4 text-sm text-white/45">
+                  No matching members found.
                 </div>
+              ) : null}
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="mt-5">
+              <p className="mb-2 text-[11px] uppercase tracking-[0.16em] text-white/35">DMs</p>
 
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="truncate text-[14px] font-medium text-white">{person.name}</p>
-                    <span className="text-[11px] text-white/35">{person.time}</span>
-                  </div>
+              <div className="space-y-2">
+                {dmThreads.map((thread) => {
+                  const href = `/messages/${thread.slug}`;
+                  const active = pathname === href;
 
-                  <p className="mt-0.5 truncate text-[12px] text-white/45">{person.role}</p>
+                  return (
+                    <Link
+                      key={thread.slug}
+                      href={href}
+                      className={`block rounded-xl px-3 py-2.5 transition ${active ? "bg-white/10" : "hover:bg-white/5"}`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="relative mt-0.5">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#3FA7D6] text-sm font-medium text-white">
+                            {thread.avatarLabel ?? thread.name.charAt(0)}
+                          </div>
+                          {thread.online ? (
+                            <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border border-[#101010] bg-[#2EC4B6]" />
+                          ) : null}
+                        </div>
 
-                  <p className="mt-1 truncate text-[12px] text-white/60">{person.lastMessage}</p>
-                </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="truncate text-[14px] font-medium text-white">{thread.name}</p>
+                            <span className="text-[11px] text-white/35">{thread.time}</span>
+                          </div>
 
-                {person.unread > 0 ? (
-                  <div className="ml-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#FF3B3F] px-1.5 text-[11px] font-medium text-white">
-                    {person.unread}
-                  </div>
-                ) : null}
+                          <p className="mt-0.5 truncate text-[12px] text-white/45">{thread.subtitle}</p>
+                          <p className="mt-1 truncate text-[12px] text-white/60">{thread.lastMessage}</p>
+                        </div>
+
+                        {thread.unread > 0 ? (
+                          <div className="ml-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#FF3B3F] px-1.5 text-[11px] font-medium text-white">
+                            {thread.unread}
+                          </div>
+                        ) : null}
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
-            </Link>
-          );
-        })}
+            </div>
+
+            <div className="mt-6">
+              <p className="mb-2 text-[11px] uppercase tracking-[0.16em] text-white/35">Group Chats</p>
+
+              <div className="space-y-2">
+                {groupThreads.map((thread) => {
+                  const href = `/messages/${thread.slug}`;
+                  const active = pathname === href;
+
+                  return (
+                    <Link
+                      key={thread.slug}
+                      href={href}
+                      className={`block rounded-xl px-3 py-2.5 transition ${active ? "bg-white/10" : "hover:bg-white/5"}`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-xs font-semibold text-white">
+                          {thread.avatarLabel ?? thread.name.slice(0, 2)}
+                        </div>
+
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="truncate text-[14px] font-medium text-white">{thread.name}</p>
+                            <span className="text-[11px] text-white/35">{thread.time}</span>
+                          </div>
+
+                          <p className="mt-0.5 truncate text-[12px] text-white/45">{thread.subtitle}</p>
+                          <p className="mt-1 truncate text-[12px] text-white/60">{thread.lastMessage}</p>
+                        </div>
+
+                        {thread.unread > 0 ? (
+                          <div className="ml-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#FF3B3F] px-1.5 text-[11px] font-medium text-white">
+                            {thread.unread}
+                          </div>
+                        ) : null}
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </aside>
   );
