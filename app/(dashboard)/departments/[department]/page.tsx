@@ -1,5 +1,5 @@
 import {redirect} from "next/navigation";
-import {departments} from "@/lib/mockData";
+import {departments} from "@/lib/mock-data";
 
 type DepartmentPageProps = {
   params: Promise<{department: string}>;

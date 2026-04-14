@@ -1,4 +1,4 @@
-import {departmentMessages} from "@/lib/mockData";
+import {departmentMessages} from "@/lib/mock-data";
 
 export default function HomePage() {
   const engineeringMessages = departmentMessages.Engineering;

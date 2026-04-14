@@ -1,4 +1,4 @@
-import {posts} from "@/lib/mockData";
+import {posts} from "@/lib/mock-data";
 import PostMetaChips from "@/components/feed/PostMetaChips";
 
 type PostDetailPageProps = {

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import {useMemo, useState} from "react";
 import {usePathname} from "next/navigation";
-import {messageMembers, messageThreads} from "@/lib/mockData";
+import {messageMembers, messageThreads} from "@/lib/mock-data";
 
 export default function DirectMessagesMenu() {
   const pathname = usePathname();

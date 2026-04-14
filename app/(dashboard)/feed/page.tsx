@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {posts} from "@/lib/mockData";
+import {posts} from "@/lib/mock-data";
 import PostMetaChips from "@/components/feed/PostMetaChips";
 import ContentSkeleton from "@/components/ui/ContentSkeleton";
 

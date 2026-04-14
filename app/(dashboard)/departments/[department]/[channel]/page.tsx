@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {departmentChannelContent, posts} from "@/lib/mockData";
+import {departmentChannelContent, posts} from "@/lib/mock-data";
 import PostMetaChips from "@/components/feed/PostMetaChips";
 import EmptyState from "@/components/ui/EmptyState";
 

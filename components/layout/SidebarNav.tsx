@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {departments} from "@/lib/mockData";
+import {departments} from "@/lib/mock-data";
 import {useRole} from "@/components/providers/RoleProvider";
 
 const workspaceNav = [

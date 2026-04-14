@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {notifications} from "@/lib/mockData";
+import {notifications} from "@/lib/mock-data";
 import EmptyState from "@/components/ui/EmptyState";
 
 function badgeClasses(type: string) {

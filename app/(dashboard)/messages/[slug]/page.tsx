@@ -1,4 +1,4 @@
-import {messageThreads} from "@/lib/mockData";
+import {messageThreads} from "@/lib/mock-data";
 import EmptyState from "@/components/ui/EmptyState";
 import MessageComposer from "@/components/messages/MessageComposer";
 
