@@ -3,7 +3,7 @@
 import Link from "next/link";
 import {useMemo, useState} from "react";
 import {usePathname} from "next/navigation";
-import {messageMembers, messageThreads} from "@/lib/mockData";
+import {messageMembers, messageThreads} from "@/lib/mock-data";
 
 export default function DirectMessagesMenu() {
   const pathname = usePathname();
@@ -32,12 +32,8 @@ export default function DirectMessagesMenu() {
         />
 
         <div className="grid grid-cols-2 gap-2">
-          <button className="mindco-button rounded-2xl px-3 py-2 text-sm text-white transition">
-            New DM
-          </button>
-          <button className="mindco-button rounded-2xl px-3 py-2 text-sm text-white transition">
-            Create Group
-          </button>
+          <button className="mindco-button rounded-2xl px-3 py-2 text-sm text-white transition">New DM</button>
+          <button className="mindco-button rounded-2xl px-3 py-2 text-sm text-white transition">Create Group</button>
         </div>
       </div>
       <div className="mt-5 min-h-0 flex-1 overflow-y-auto pr-1 hide-scrollbar">

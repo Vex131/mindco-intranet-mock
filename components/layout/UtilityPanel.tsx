@@ -1,7 +1,7 @@
 "use client";
 
 import {usePathname} from "next/navigation";
-import {departmentUtilityData, globalUtilityData, messageThreads, messageUtilityData} from "@/lib/mockData";
+import {departmentUtilityData, globalUtilityData, messageThreads, messageUtilityData} from "@/lib/mock-data";
 
 function PanelShell({children}: {children?: React.ReactNode}) {
   return (

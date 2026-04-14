@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {departments} from "@/lib/mockData";
+import {departments} from "@/lib/mock-data";
 import {useRole} from "@/components/providers/RoleProvider";
 
 const workspaceNav = [
@@ -50,9 +50,7 @@ export default function SidebarNav() {
                 <Link
                   href="/admin"
                   className={`block rounded-xl px-3 py-1.5 text-[14px] transition ${
-                    pathname === "/admin"
-                      ? "mindco-pill text-white"
-                      : "text-white/62 hover:bg-white/6 hover:text-white"
+                    pathname === "/admin" ? "mindco-pill text-white" : "text-white/62 hover:bg-white/6 hover:text-white"
                   }`}
                 >
                   Admin

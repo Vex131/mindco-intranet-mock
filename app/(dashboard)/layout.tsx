@@ -6,7 +6,7 @@ import AppHeader from "@/components/layout/AppHeader";
 import DepartmentChannels from "@/components/layout/DepartmentChannels";
 import SidebarNav from "@/components/layout/SidebarNav";
 import UtilityPanel from "@/components/layout/UtilityPanel";
-import {departments} from "@/lib/mockData";
+import {departments} from "@/lib/mock-data";
 import {RoleProvider} from "@/components/providers/RoleProvider";
 import DirectMessagesMenu from "@/components/layout/DirectMessagesMenu";
 
