@@ -12,8 +12,12 @@ export default async function PostDetailPage({params}: PostDetailPageProps) {
 
   if (!post) {
     return (
-      <div className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
-        <h1 className="text-2xl font-semibold text-white">Post not found</h1>
+      <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
+        <div className="space-y-6 pb-6">
+          <div className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+            <h1 className="text-2xl font-semibold text-white">Post not found</h1>
+          </div>
+        </div>
       </div>
     );
   }
@@ -21,7 +25,8 @@ export default async function PostDetailPage({params}: PostDetailPageProps) {
   const isAnnouncement = post.type === "announcement";
 
   return (
-    <div className="space-y-6">
+    <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
+      <div className="space-y-6 pb-6">
       <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
         <div className="flex flex-wrap items-center gap-3">
           <span
@@ -104,6 +109,7 @@ export default async function PostDetailPage({params}: PostDetailPageProps) {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }

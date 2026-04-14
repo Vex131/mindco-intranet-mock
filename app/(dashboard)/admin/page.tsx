@@ -7,15 +7,17 @@ export default function AdminPage() {
 
   if (role !== "Admin") {
     return (
-      <div className="space-y-8">
-        <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#FF3B3F]">Restricted</p>
-          <h1 className="mt-3 text-3xl font-semibold text-white">Admin access required</h1>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
-            This area is only visible to administrators. Switch the user type to Admin to view the full admin workspace
-            mock.
-          </p>
-        </section>
+      <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
+        <div className="space-y-8 pb-6">
+          <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+            <p className="text-sm uppercase tracking-[0.2em] text-[#FF3B3F]">Restricted</p>
+            <h1 className="mt-3 text-3xl font-semibold text-white">Admin access required</h1>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
+              This area is only visible to administrators. Switch the user type to Admin to view the full admin workspace
+              mock.
+            </p>
+          </section>
+        </div>
       </div>
     );
   }
@@ -53,7 +55,8 @@ export default function AdminPage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
+      <div className="space-y-8 pb-6">
       <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#FF3B3F]">Administration</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">Admin Control Center</h1>
@@ -174,6 +177,7 @@ export default function AdminPage() {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }

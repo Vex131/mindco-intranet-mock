@@ -16,8 +16,12 @@ export default async function DepartmentChannelPage({params}: DepartmentChannelP
 
   if (!departmentData || !channelData) {
     return (
-      <div className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
-        <h1 className="text-2xl font-semibold text-white">Channel not found</h1>
+      <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
+        <div className="space-y-6 pb-6">
+          <div className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+            <h1 className="text-2xl font-semibold text-white">Channel not found</h1>
+          </div>
+        </div>
       </div>
     );
   }
@@ -25,7 +29,8 @@ export default async function DepartmentChannelPage({params}: DepartmentChannelP
   const channelPosts = posts.filter((post) => post.department === department && post.channel === channel);
 
   return (
-    <div className="space-y-6">
+    <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
+      <div className="space-y-6 pb-6">
       <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#2EC4B6]">Department Channel</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">#{channelData.title}</h1>
@@ -73,6 +78,7 @@ export default async function DepartmentChannelPage({params}: DepartmentChannelP
           )}
         </div>
       </section>
+      </div>
     </div>
   );
 }

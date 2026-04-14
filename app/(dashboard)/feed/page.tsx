@@ -9,7 +9,8 @@ export default function FeedPage() {
   const showSkeleton = false;
 
   return (
-    <div className="space-y-8">
+    <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
+      <div className="space-y-8 pb-6">
       <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#2EC4B6]">Workplace Activity</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">My Feed</h1>
@@ -53,6 +54,7 @@ export default function FeedPage() {
           ))
         )}
       </section>
+      </div>
     </div>
   );
 }

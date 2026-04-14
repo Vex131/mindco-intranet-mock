@@ -9,7 +9,8 @@ export default function GalleryPage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
+      <div className="space-y-8 pb-6">
       <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#FF3B3F]">Media</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">Gallery</h1>
@@ -32,6 +33,7 @@ export default function GalleryPage() {
           </article>
         ))}
       </section>
+      </div>
     </div>
   );
 }

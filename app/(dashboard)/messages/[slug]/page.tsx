@@ -150,10 +150,14 @@ export default async function MessageThreadPage({params}: MessagePageProps) {
 
   if (!activeChat) {
     return (
-      <EmptyState
-        title="Conversation not found"
-        description="This message thread could not be found. Try selecting a different conversation from the sidebar."
-      />
+      <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
+        <div className="space-y-8 pb-6">
+          <EmptyState
+            title="Conversation not found"
+            description="This message thread could not be found. Try selecting a different conversation from the sidebar."
+          />
+        </div>
+      </div>
     );
   }
 

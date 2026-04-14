@@ -36,7 +36,8 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
+      <div className="space-y-8 pb-6">
       <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div className="flex items-start gap-5">
@@ -167,6 +168,7 @@ export default function ProfilePage() {
           )}
         </div>
       </section>
+      </div>
     </div>
   );
 }
