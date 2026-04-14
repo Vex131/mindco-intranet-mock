@@ -5,14 +5,13 @@ export const activePolls: ActivePoll[] = [
     id: 1,
     title: "What time should the Q2 town hall start?",
     description:
-      "We’re finalizing the all-hands schedule for next Thursday. Vote for the time that works best for your team.",
+      "HR is finalizing the all-hands schedule for next Thursday. Vote for the time that works best for your team.",
     status: "Closing soon",
     totalVotes: 9,
     closesIn: "Closes today • 5:00 PM",
-    author: "Leadership",
-    highlighted: true,
+    author: "HR",
     sourceType: "feed",
-    sourceName: "My Feed",
+    sourceName: "HR Announcements",
     voteVisibility: "public",
     options: [
       {
