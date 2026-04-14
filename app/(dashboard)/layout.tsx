@@ -6,7 +6,7 @@ import AppHeader from "@/components/layout/AppHeader";
 import DepartmentChannels from "@/components/layout/DepartmentChannels";
 import SidebarNav from "@/components/layout/SidebarNav";
 import UtilityPanel from "@/components/layout/UtilityPanel";
-import {departments} from "@/lib/mock-data";
+import {departments} from "@/lib/mockData";
 import {RoleProvider} from "@/components/providers/RoleProvider";
 import DirectMessagesMenu from "@/components/layout/DirectMessagesMenu";
 
@@ -24,7 +24,7 @@ function DashboardShell({children}: {children: React.ReactNode}) {
   const showMessagesMenu = pathname.startsWith("/messages");
 
   return (
-    <div className="flex h-full min-h-0 flex-col overflow-hidden bg-[#0F0F0F] text-[#F5F5F5]">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden mindco-app-shell text-[#F5F7FF]">
       <AppHeader />
 
       <div className="flex min-h-0 flex-1 overflow-hidden">
@@ -39,7 +39,7 @@ function DashboardShell({children}: {children: React.ReactNode}) {
           />
         ) : null}
 
-        <main className="min-w-0 flex-1 overflow-hidden bg-[#111111]">
+        <main className="min-w-0 flex-1 overflow-hidden bg-transparent">
           <div className="mx-auto flex h-full min-h-0 max-w-6xl flex-col p-6">{children}</div>
         </main>
 

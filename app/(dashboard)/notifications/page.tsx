@@ -5,19 +5,19 @@ import EmptyState from "@/components/ui/EmptyState";
 function badgeClasses(type: string) {
   switch (type) {
     case "announcement":
-      return "bg-[#FF3B3F]/15 text-[#FF9A9C]";
+      return "bg-[#6675ff]/15 text-[#FF9A9C]";
     case "message":
-      return "bg-[#2EC4B6]/15 text-[#7DE3D7]";
+      return "bg-[rgba(76,224,179,0.14)] text-[#8ef0cf]";
     case "channel":
-      return "bg-[#3FA7D6]/15 text-[#8DD0EA]";
+      return "bg-[linear-gradient(180deg,#7c6cff,#4e7bff)]/15 text-[#8DD0EA]";
     case "poll":
-      return "bg-[#FFD23F]/15 text-[#FFE27D]";
+      return "bg-[rgba(255,157,77,0.14)] text-[#ffc48d]";
     case "comment":
-      return "bg-white/10 text-white/75";
+      return "mindco-pill text-white/75";
     case "reaction":
-      return "bg-white/10 text-white/75";
+      return "mindco-pill text-white/75";
     default:
-      return "bg-white/10 text-white/75";
+      return "mindco-pill text-white/75";
   }
 }
 
@@ -28,7 +28,7 @@ export default function NotificationsPage() {
   return (
     <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
       <div className="space-y-8 pb-6">
-      <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+      <section className="rounded-[24px] mindco-panel p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#2EC4B6]">Updates</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">Notifications</h1>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
@@ -40,7 +40,7 @@ export default function NotificationsPage() {
       <section className="space-y-4">
         <div className="flex items-center justify-between gap-4">
           <h2 className="text-lg font-semibold text-white">Unread</h2>
-          <span className="rounded-full bg-[#FF3B3F]/15 px-3 py-1 text-xs font-medium text-[#FF9A9C]">
+          <span className="rounded-full bg-[#6675ff]/15 px-3 py-1 text-xs font-medium text-[#FF9A9C]">
             {unread.length} new
           </span>
         </div>
@@ -51,7 +51,7 @@ export default function NotificationsPage() {
               <Link
                 key={item.id}
                 href={item.href}
-                className="block rounded-[24px] border border-white/10 bg-[#1A1A1A] p-5 transition hover:border-white/20 hover:bg-[#202020]"
+                className="block rounded-[24px] mindco-panel p-5 transition hover:border-[rgba(151,178,255,0.24)] hover:bg-[rgba(24,34,78,0.92)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
@@ -60,7 +60,7 @@ export default function NotificationsPage() {
                         {item.type}
                       </span>
                       <span className="text-xs text-white/40">{item.time}</span>
-                      <span className="h-2 w-2 rounded-full bg-[#FF3B3F]" />
+                      <span className="h-2 w-2 rounded-full bg-[#6675ff]" />
                     </div>
 
                     <p className="mt-3 text-base font-semibold text-white">{item.title}</p>
@@ -86,7 +86,7 @@ export default function NotificationsPage() {
               <Link
                 key={item.id}
                 href={item.href}
-                className="block rounded-[24px] border border-white/10 bg-[#1A1A1A] p-5 transition hover:border-white/20 hover:bg-[#202020]"
+                className="block rounded-[24px] mindco-panel p-5 transition hover:border-[rgba(151,178,255,0.24)] hover:bg-[rgba(24,34,78,0.92)]"
               >
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-3">

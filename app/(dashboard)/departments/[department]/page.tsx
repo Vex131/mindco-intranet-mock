@@ -14,7 +14,7 @@ export default async function DepartmentPage({params}: DepartmentPageProps) {
     return (
       <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
         <div className="space-y-8 pb-6">
-          <div className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+          <div className="rounded-[24px] mindco-panel p-6">
             <h1 className="text-2xl font-semibold text-white">Department not found</h1>
           </div>
         </div>

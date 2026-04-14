@@ -1,11 +1,11 @@
 "use client";
 
 import {usePathname} from "next/navigation";
-import {departmentUtilityData, globalUtilityData, messageThreads, messageUtilityData} from "@/lib/mock-data";
+import {departmentUtilityData, globalUtilityData, messageThreads, messageUtilityData} from "@/lib/mockData";
 
 function PanelShell({children}: {children?: React.ReactNode}) {
   return (
-    <aside className="h-full w-80 overflow-y-auto border-l border-white/10 bg-[#121212] p-5 hide-scrollbar">
+    <aside className="h-full w-80 overflow-y-auto border-l border-[rgba(129,157,255,0.12)] mindco-sidebar p-5 hide-scrollbar">
       <div className="space-y-4">{children}</div>
     </aside>
   );
@@ -13,7 +13,7 @@ function PanelShell({children}: {children?: React.ReactNode}) {
 
 function SectionCard({title, children}: {title: string; children: React.ReactNode}) {
   return (
-    <section className="rounded-[24px] border border-white/10 bg-[#171717] p-4">
+    <section className="rounded-[24px] mindco-panel-soft p-4">
       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/35">{title}</p>
       <div className="mt-4">{children}</div>
     </section>
@@ -22,7 +22,7 @@ function SectionCard({title, children}: {title: string; children: React.ReactNod
 
 function ItemCard({title, meta}: {title: string; meta?: string}) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/20 p-3 transition hover:bg-white/[0.03]">
+    <div className="rounded-2xl mindco-panel-soft p-3 transition hover:bg-white/[0.04]">
       <p className="text-sm text-white">{title}</p>
       {meta ? <p className="mt-1 text-xs text-white/45">{meta}</p> : null}
     </div>
@@ -31,9 +31,9 @@ function ItemCard({title, meta}: {title: string; meta?: string}) {
 
 function HeaderCard({label, name, avatarLabel}: {label: string; name: string; avatarLabel: string}) {
   return (
-    <section className="rounded-[28px] border border-white/10 bg-[#171717] p-5">
+    <section className="rounded-[28px] mindco-panel p-5">
       <div className="flex flex-col items-center text-center">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/10 text-xl font-semibold text-white">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full border border-[rgba(129,157,255,0.16)] bg-white/[0.05] text-xl font-semibold text-white">
           {avatarLabel}
         </div>
 
@@ -73,7 +73,7 @@ export default function UtilityPanel() {
               {data.members.map((member) => (
                 <div
                   key={member.name}
-                  className="flex items-center justify-between rounded-2xl bg-white/[0.03] px-3 py-2.5"
+                  className="flex items-center justify-between rounded-2xl bg-white/[0.04] px-3 py-2.5"
                 >
                   <div className="flex items-center gap-3">
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-xs font-medium text-white">
@@ -86,7 +86,7 @@ export default function UtilityPanel() {
                     </div>
                   </div>
 
-                  {member.online ? <span className="h-2.5 w-2.5 rounded-full bg-white/60" /> : null}
+                  {member.online ? <span className="h-2.5 w-2.5 rounded-full bg-[#4ce0b3]" /> : null}
                 </div>
               ))}
             </div>

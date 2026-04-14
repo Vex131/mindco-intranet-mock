@@ -9,7 +9,7 @@ export default function AdminPage() {
     return (
       <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
         <div className="space-y-8 pb-6">
-          <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+          <section className="rounded-[24px] mindco-panel p-6">
             <p className="text-sm uppercase tracking-[0.2em] text-[#FF3B3F]">Restricted</p>
             <h1 className="mt-3 text-3xl font-semibold text-white">Admin access required</h1>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
@@ -57,7 +57,7 @@ export default function AdminPage() {
   return (
     <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
       <div className="space-y-8 pb-6">
-      <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+      <section className="rounded-[24px] mindco-panel p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#FF3B3F]">Administration</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">Admin Control Center</h1>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
@@ -70,7 +70,7 @@ export default function AdminPage() {
         {statCards.map((item) => (
           <div
             key={item.label}
-            className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-5"
+            className="rounded-[24px] mindco-panel p-5"
           >
             <p className="text-2xl font-semibold text-white">{item.value}</p>
             <p className="mt-2 text-sm text-white/50">{item.label}</p>
@@ -79,13 +79,13 @@ export default function AdminPage() {
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-        <div className="rounded-[28px] border border-white/10 bg-[#1A1A1A] p-6">
+        <div className="rounded-[28px] mindco-panel p-6">
           <h2 className="text-lg font-semibold text-white">Admin Permissions</h2>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {permissions.map((item) => (
               <div
                 key={item}
-                className="rounded-2xl bg-black/20 p-4"
+                className="rounded-2xl bg-[rgba(255,255,255,0.035)] p-4"
               >
                 <p className="text-sm text-white">{item}</p>
               </div>
@@ -93,13 +93,13 @@ export default function AdminPage() {
           </div>
         </div>
 
-        <div className="rounded-[28px] border border-white/10 bg-[#1A1A1A] p-6">
+        <div className="rounded-[28px] mindco-panel p-6">
           <h2 className="text-lg font-semibold text-white">Pending Actions</h2>
           <div className="mt-5 space-y-3">
             {pendingActions.map((item) => (
               <div
                 key={item}
-                className="rounded-2xl bg-black/20 p-4"
+                className="rounded-2xl bg-[rgba(255,255,255,0.035)] p-4"
               >
                 <p className="text-sm text-white">{item}</p>
               </div>
@@ -108,10 +108,10 @@ export default function AdminPage() {
         </div>
       </section>
 
-      <section className="rounded-[28px] border border-white/10 bg-[#1A1A1A] p-6">
+      <section className="rounded-[28px] mindco-panel p-6">
         <div className="flex items-center justify-between gap-4">
           <h2 className="text-lg font-semibold text-white">User Management</h2>
-          <button className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
+          <button className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2 text-sm text-white/70">
             Add User
           </button>
         </div>
@@ -139,7 +139,7 @@ export default function AdminPage() {
       </section>
 
       <section className="grid gap-6 xl:grid-cols-2">
-        <div className="rounded-[28px] border border-white/10 bg-[#1A1A1A] p-6">
+        <div className="rounded-[28px] mindco-panel p-6">
           <h2 className="text-lg font-semibold text-white">Moderation Tools</h2>
           <div className="mt-5 space-y-3">
             {[
@@ -150,7 +150,7 @@ export default function AdminPage() {
             ].map((item) => (
               <div
                 key={item}
-                className="rounded-2xl bg-black/20 p-4"
+                className="rounded-2xl bg-[rgba(255,255,255,0.035)] p-4"
               >
                 <p className="text-sm text-white">{item}</p>
               </div>
@@ -158,7 +158,7 @@ export default function AdminPage() {
           </div>
         </div>
 
-        <div className="rounded-[28px] border border-white/10 bg-[#1A1A1A] p-6">
+        <div className="rounded-[28px] mindco-panel p-6">
           <h2 className="text-lg font-semibold text-white">Publishing Controls</h2>
           <div className="mt-5 space-y-3">
             {[
@@ -169,7 +169,7 @@ export default function AdminPage() {
             ].map((item) => (
               <div
                 key={item}
-                className="rounded-2xl bg-black/20 p-4"
+                className="rounded-2xl bg-[rgba(255,255,255,0.035)] p-4"
               >
                 <p className="text-sm text-white">{item}</p>
               </div>

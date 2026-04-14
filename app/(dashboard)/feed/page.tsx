@@ -11,7 +11,7 @@ export default function FeedPage() {
   return (
     <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
       <div className="space-y-8 pb-6">
-      <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+      <section className="rounded-[24px] mindco-panel p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#2EC4B6]">Workplace Activity</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">My Feed</h1>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
@@ -19,9 +19,9 @@ export default function FeedPage() {
         </p>
       </section>
 
-      <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-5">
+      <section className="rounded-[24px] mindco-panel p-5">
         <p className="text-lg font-semibold text-white">Create a post</p>
-        <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-white/35">
+        <div className="mt-4 rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] px-4 py-4 text-sm text-white/35">
           Share an update with your team...
         </div>
       </section>
@@ -37,7 +37,7 @@ export default function FeedPage() {
             <Link
               key={post.slug}
               href={`/posts/${post.slug}`}
-              className="block rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6 transition hover:border-white/20 hover:bg-[#202020]"
+              className="block rounded-[24px] mindco-panel p-6 transition hover:border-[rgba(151,178,255,0.24)] hover:bg-[rgba(24,34,78,0.92)]"
             >
               <p className="text-sm font-medium text-white">{post.author}</p>
               <p className="mt-1 text-xs text-white/45">

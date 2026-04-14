@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {departments} from "@/lib/mock-data";
+import {departments} from "@/lib/mockData";
 import {useRole} from "@/components/providers/RoleProvider";
 
 const workspaceNav = [
@@ -23,11 +23,11 @@ export default function SidebarNav() {
   const {role, setRole} = useRole();
 
   return (
-    <aside className="flex h-full min-h-0 w-56 flex-col border-r border-white/10 bg-[#121212]">
+    <aside className="flex h-full min-h-0 w-56 flex-col border-r border-[rgba(129,157,255,0.12)] mindco-sidebar">
       <div className="min-h-0 flex-1 overflow-y-auto p-5 hide-scrollbar">
         <div className="space-y-8">
           <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Workspace</p>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/30">Workspace</p>
 
             <nav className="space-y-1">
               {workspaceNav.map((item) => {
@@ -38,7 +38,7 @@ export default function SidebarNav() {
                     key={item.label}
                     href={item.href}
                     className={`block rounded-xl px-3 py-1.5 text-[14px] transition ${
-                      active ? "bg-white/10 text-white" : "text-white/65 hover:bg-white/5 hover:text-white"
+                      active ? "mindco-pill text-white" : "text-white/62 hover:bg-white/6 hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -51,8 +51,8 @@ export default function SidebarNav() {
                   href="/admin"
                   className={`block rounded-xl px-3 py-1.5 text-[14px] transition ${
                     pathname === "/admin"
-                      ? "bg-[#FF3B3F]/12 text-white"
-                      : "text-white/65 hover:bg-white/5 hover:text-white"
+                      ? "mindco-pill text-white"
+                      : "text-white/62 hover:bg-white/6 hover:text-white"
                   }`}
                 >
                   Admin
@@ -62,7 +62,7 @@ export default function SidebarNav() {
           </div>
 
           <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Communication</p>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/30">Communication</p>
 
             <nav className="space-y-1">
               {communicationNav.map((item) => {
@@ -73,7 +73,7 @@ export default function SidebarNav() {
                     key={item.label}
                     href={item.href}
                     className={`block rounded-xl px-3 py-1.5 text-[14px] transition ${
-                      active ? "bg-white/10 text-white" : "text-white/65 hover:bg-white/5 hover:text-white"
+                      active ? "mindco-pill text-white" : "text-white/62 hover:bg-white/6 hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -84,7 +84,7 @@ export default function SidebarNav() {
           </div>
 
           <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">Departments</p>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/30">Departments</p>
 
             <div className="space-y-1.5">
               {departments.map((dept) => {
@@ -96,7 +96,7 @@ export default function SidebarNav() {
                     key={dept.name}
                     href={href}
                     className={`block rounded-xl px-3 py-1.5 text-[14px] transition ${
-                      active ? "bg-white/10 text-white" : "text-white/65 hover:bg-white/5 hover:text-white"
+                      active ? "mindco-pill text-white" : "text-white/62 hover:bg-white/6 hover:text-white"
                     }`}
                   >
                     {dept.name}
@@ -107,15 +107,15 @@ export default function SidebarNav() {
           </div>
 
           <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/35">User Type</p>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/30">User Type</p>
 
-            <div className="grid grid-cols-2 gap-2 rounded-2xl bg-white/5 p-1">
+            <div className="grid grid-cols-2 gap-2 rounded-2xl border border-[rgba(129,157,255,0.12)] bg-white/[0.03] p-1">
               {(["Employee", "Admin"] as const).map((item) => (
                 <button
                   key={item}
                   onClick={() => setRole(item)}
                   className={`rounded-xl px-3 py-2 text-sm transition ${
-                    role === item ? "bg-white/10 text-white" : "text-white/55 hover:text-white"
+                    role === item ? "mindco-pill text-white" : "text-white/55 hover:bg-white/6 hover:text-white"
                   }`}
                 >
                   {item}
@@ -126,11 +126,11 @@ export default function SidebarNav() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 p-4">
+      <div className="border-t border-[rgba(129,157,255,0.12)] p-4">
         <Link
           href="/profile"
           className={`flex items-center gap-2.5 rounded-xl p-1.5 transition ${
-            pathname === "/profile" ? "bg-white/10" : "bg-white/5 hover:bg-white/10"
+            pathname === "/profile" ? "mindco-pill" : "bg-white/[0.03] hover:bg-white/[0.06]"
           }`}
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-sm font-medium text-white">

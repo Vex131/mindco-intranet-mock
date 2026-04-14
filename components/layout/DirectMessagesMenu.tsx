@@ -3,7 +3,7 @@
 import Link from "next/link";
 import {useMemo, useState} from "react";
 import {usePathname} from "next/navigation";
-import {messageMembers, messageThreads} from "@/lib/mock-data";
+import {messageMembers, messageThreads} from "@/lib/mockData";
 
 export default function DirectMessagesMenu() {
   const pathname = usePathname();
@@ -17,9 +17,9 @@ export default function DirectMessagesMenu() {
   const groupThreads = messageThreads.filter((thread) => thread.type === "group");
 
   return (
-    <aside className="flex h-full w-72 flex-col overflow-hidden border-r border-white/10 bg-[#101010] px-4 py-5">
+    <aside className="flex h-full w-72 flex-col overflow-hidden border-r border-[rgba(129,157,255,0.12)] mindco-sidebar px-4 py-5">
       <div className="mb-5">
-        <p className="text-[11px] uppercase tracking-[0.18em] text-[#2EC4B6]">Messages</p>
+        <p className="text-[11px] uppercase tracking-[0.18em] text-[#78d9ff]">Messages</p>
         <h2 className="mt-1.5 text-[18px] font-semibold text-white">Direct Messages</h2>
       </div>
 
@@ -28,14 +28,14 @@ export default function DirectMessagesMenu() {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search member to message..."
-          className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white outline-none placeholder:text-white/35"
+          className="w-full mindco-input w-full rounded-2xl px-3 py-2.5 text-sm text-white placeholder:text-white/35"
         />
 
         <div className="grid grid-cols-2 gap-2">
-          <button className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10">
+          <button className="mindco-button rounded-2xl px-3 py-2 text-sm text-white transition">
             New DM
           </button>
-          <button className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10">
+          <button className="mindco-button rounded-2xl px-3 py-2 text-sm text-white transition">
             Create Group
           </button>
         </div>
@@ -50,15 +50,15 @@ export default function DirectMessagesMenu() {
                 <Link
                   key={member.slug}
                   href={`/messages/${member.slug}`}
-                  className="block rounded-xl px-3 py-2.5 transition hover:bg-white/5"
+                  className="block rounded-xl px-3 py-2.5 transition hover:bg-white/[0.06]"
                 >
                   <div className="flex items-center gap-3">
                     <div className="relative">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#3FA7D6] text-sm font-medium text-white">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#7c6cff,#4e7bff)] text-sm font-medium text-white">
                         {member.name.charAt(0)}
                       </div>
                       {member.online ? (
-                        <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border border-[#101010] bg-[#2EC4B6]" />
+                        <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border border-[#0a1023] bg-[#4ce0b3]" />
                       ) : null}
                     </div>
 
@@ -71,7 +71,7 @@ export default function DirectMessagesMenu() {
               ))}
 
               {filteredMembers.length === 0 ? (
-                <div className="rounded-xl border border-dashed border-white/10 px-3 py-4 text-sm text-white/45">
+                <div className="rounded-xl rounded-2xl border border-dashed border-[rgba(129,157,255,0.16)] bg-white/[0.02] px-3 py-4 text-sm text-white/45">
                   No matching members found.
                 </div>
               ) : null}
@@ -91,15 +91,15 @@ export default function DirectMessagesMenu() {
                     <Link
                       key={thread.slug}
                       href={href}
-                      className={`block rounded-xl px-3 py-2.5 transition ${active ? "bg-white/10" : "hover:bg-white/5"}`}
+                      className={`block rounded-xl px-3 py-2.5 transition ${active ? "mindco-pill" : "hover:bg-white/[0.06]"}`}
                     >
                       <div className="flex items-start gap-3">
                         <div className="relative mt-0.5">
-                          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#3FA7D6] text-sm font-medium text-white">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#7c6cff,#4e7bff)] text-sm font-medium text-white">
                             {thread.avatarLabel ?? thread.name.charAt(0)}
                           </div>
                           {thread.online ? (
-                            <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border border-[#101010] bg-[#2EC4B6]" />
+                            <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border border-[#0a1023] bg-[#4ce0b3]" />
                           ) : null}
                         </div>
 
@@ -114,7 +114,7 @@ export default function DirectMessagesMenu() {
                         </div>
 
                         {thread.unread > 0 ? (
-                          <div className="ml-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#FF3B3F] px-1.5 text-[11px] font-medium text-white">
+                          <div className="ml-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#6675ff] px-1.5 text-[11px] font-medium text-white">
                             {thread.unread}
                           </div>
                         ) : null}
@@ -137,10 +137,10 @@ export default function DirectMessagesMenu() {
                     <Link
                       key={thread.slug}
                       href={href}
-                      className={`block rounded-xl px-3 py-2.5 transition ${active ? "bg-white/10" : "hover:bg-white/5"}`}
+                      className={`block rounded-xl px-3 py-2.5 transition ${active ? "mindco-pill" : "hover:bg-white/[0.06]"}`}
                     >
                       <div className="flex items-start gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-xs font-semibold text-white">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-xl mindco-pill text-xs font-semibold text-white">
                           {thread.avatarLabel ?? thread.name.slice(0, 2)}
                         </div>
 
@@ -155,7 +155,7 @@ export default function DirectMessagesMenu() {
                         </div>
 
                         {thread.unread > 0 ? (
-                          <div className="ml-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#FF3B3F] px-1.5 text-[11px] font-medium text-white">
+                          <div className="ml-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#6675ff] px-1.5 text-[11px] font-medium text-white">
                             {thread.unread}
                           </div>
                         ) : null}

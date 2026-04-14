@@ -8,7 +8,7 @@ export default function AnnouncementsPage() {
   return (
     <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
       <div className="space-y-8 pb-6">
-      <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+      <section className="rounded-[24px] mindco-panel p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#2EC4B6]">Official Communication</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">Announcements</h1>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
@@ -21,10 +21,10 @@ export default function AnnouncementsPage() {
           <Link
             key={post.slug}
             href={`/posts/${post.slug}`}
-            className="block rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6 transition hover:border-white/20 hover:bg-[#202020]"
+            className="block rounded-[24px] mindco-panel p-6 transition hover:border-[rgba(151,178,255,0.24)] hover:bg-[rgba(24,34,78,0.92)]"
           >
             <div className="flex items-center gap-3">
-              <span className="rounded-full bg-[#FF3B3F]/15 px-3 py-1 text-xs font-medium text-[#FF9A9C]">
+              <span className="rounded-full bg-[#6675ff]/15 px-3 py-1 text-xs font-medium text-[#FF9A9C]">
                 Official Notice
               </span>
               <span className="text-xs text-white/40">{post.time}</span>

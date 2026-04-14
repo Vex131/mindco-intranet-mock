@@ -6,7 +6,7 @@ import {activePolls, closedPolls} from "@/lib/mock-data";
 
 function PollOption({label, votes, percent}: PollOptionItem) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
+    <div className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] p-3">
       <div className="flex items-center justify-between gap-3">
         <span className="text-sm font-medium text-white">{label}</span>
         <span className="text-xs text-white/55">
@@ -42,7 +42,7 @@ function SourceBadge({sourceType, sourceName}: {sourceType: SourceType; sourceNa
       : sourceType === "dm"
         ? "border-[#2EC4B6]/25 bg-[#2EC4B6]/10 text-[#7DE4D8]"
         : sourceType === "group"
-          ? "border-[#FF3B3F]/20 bg-[#FF3B3F]/10 text-[#FF9A9C]"
+          ? "border-[#FF3B3F]/20 bg-[#6675ff]/10 text-[#FF9A9C]"
           : "border-white/10 bg-white/5 text-white/70";
 
   return <span className={`rounded-full border px-3 py-1 text-xs font-medium ${styles}`}>{sourceName}</span>;
@@ -50,7 +50,7 @@ function SourceBadge({sourceType, sourceName}: {sourceType: SourceType; sourceNa
 
 function VoteVisibilityBadge({voteVisibility}: {voteVisibility: VoteVisibility}) {
   return (
-    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/65">
+    <span className="rounded-full border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-3 py-1 text-xs text-white/65">
       {voteVisibility === "public" ? "Public votes" : "Anonymous votes"}
     </span>
   );
@@ -69,7 +69,7 @@ function PollResultsModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
-      <div className="w-full max-w-2xl rounded-[28px] border border-white/10 bg-[#171717] p-6 shadow-2xl">
+      <div className="w-full max-w-2xl rounded-[28px] mindco-panel-soft p-6 shadow-2xl">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-[#5B7CFA]">Vote Details</p>
@@ -83,7 +83,7 @@ function PollResultsModal({
 
           <button
             onClick={onClose}
-            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/70 hover:bg-white/10"
+            className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-3 py-2 text-sm text-white/70 hover:bg-white/10"
           >
             Close
           </button>
@@ -93,7 +93,7 @@ function PollResultsModal({
           {poll.options.map((option) => (
             <div
               key={option.label}
-              className="rounded-2xl border border-white/10 bg-black/20 p-4"
+              className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] p-4"
             >
               <div className="flex items-center justify-between gap-3">
                 <p className="text-sm font-medium text-white">{option.label}</p>
@@ -108,7 +108,7 @@ function PollResultsModal({
                     option.voters.map((voter) => (
                       <span
                         key={voter.id}
-                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-white/65"
+                        className="rounded-full border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-2.5 py-1 text-xs text-white/65"
                       >
                         {voter.name}
                       </span>
@@ -158,7 +158,7 @@ function PollCard({poll, onShowResults}: {poll: ActivePoll; onShowResults: (poll
           <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">{poll.description}</p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-right">
+        <div className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-right">
           <p className="text-xs uppercase tracking-[0.18em] text-white/35">Posted by</p>
           <p className="mt-1 text-sm font-medium text-white">{poll.author}</p>
         </div>
@@ -181,21 +181,21 @@ function PollCard({poll, onShowResults}: {poll: ActivePoll; onShowResults: (poll
         ))}
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-white/10 pt-5">
-        <button className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10">
+      <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-[rgba(129,157,255,0.12)] pt-5">
+        <button className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10">
           Open post
         </button>
 
         {poll.voteVisibility === "public" ? (
           <button
             onClick={() => onShowResults(poll)}
-            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10"
+            className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10"
           >
             Show voters
           </button>
         ) : null}
 
-        <button className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10">
+        <button className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10">
           Share
         </button>
       </div>
@@ -205,7 +205,7 @@ function PollCard({poll, onShowResults}: {poll: ActivePoll; onShowResults: (poll
 
 function ClosedPollCard({poll, onShowResults}: {poll: ClosedPoll; onShowResults: (poll: ClosedPoll) => void}) {
   return (
-    <article className="rounded-2xl border border-white/10 bg-black/20 p-5">
+    <article className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] p-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-2">
           <StatusBadge status="Closed" />
@@ -232,11 +232,11 @@ function ClosedPollCard({poll, onShowResults}: {poll: ClosedPoll; onShowResults:
         ))}
       </div>
 
-      <div className="mt-5 border-t border-white/10 pt-4">
+      <div className="mt-5 border-t border-[rgba(129,157,255,0.12)] pt-4">
         {poll.voteVisibility === "public" ? (
           <button
             onClick={() => onShowResults(poll)}
-            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/75 hover:bg-white/10"
+            className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2.5 text-sm text-white/75 hover:bg-white/10"
           >
             Show voters
           </button>
@@ -266,7 +266,7 @@ export default function PollsPage() {
   return (
     <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
       <div className="space-y-8 pb-6">
-        <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+        <section className="rounded-[24px] mindco-panel p-6">
           <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
             <div>
               <p className="text-sm uppercase tracking-[0.2em] text-[#FFD23F]">Engagement</p>
@@ -277,17 +277,17 @@ export default function PollsPage() {
             </div>
 
             <div className="grid grid-cols-3 gap-3">
-              <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3">
+              <div className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.16em] text-white/35">Active</p>
                 <p className="mt-2 text-xl font-semibold text-white">{activePolls.length}</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3">
+              <div className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.16em] text-white/35">Closing Soon</p>
                 <p className="mt-2 text-xl font-semibold text-white">
                   {activePolls.filter((poll) => poll.status === "Closing soon").length}
                 </p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3">
+              <div className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.16em] text-white/35">Closed</p>
                 <p className="mt-2 text-xl font-semibold text-white">{closedPolls.length}</p>
               </div>
@@ -327,13 +327,13 @@ export default function PollsPage() {
           ))}
         </section>
 
-        <section className="rounded-[28px] border border-white/10 bg-[#1A1A1A] p-6">
+        <section className="rounded-[28px] mindco-panel p-6">
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-sm uppercase tracking-[0.2em] text-white/35">Archive</p>
               <h2 className="mt-2 text-xl font-semibold text-white">Recently Closed</h2>
             </div>
-            <button className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/75 hover:bg-white/10">
+            <button className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2.5 text-sm text-white/75 hover:bg-white/10">
               View all
             </button>
           </div>

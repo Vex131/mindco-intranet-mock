@@ -6,8 +6,8 @@ type MessageComposerProps = {
 
 export default function MessageComposer({placeholder}: MessageComposerProps) {
   return (
-    <div className="border-t border-white/10 bg-[#151515] px-4 py-4">
-      <div className="flex items-end gap-3 rounded-3xl bg-white/[0.05] px-4 py-3">
+    <div className="border-t border-[rgba(129,157,255,0.12)] bg-[rgba(7,10,24,0.72)] px-4 py-4 backdrop-blur-xl">
+      <div className="flex items-end gap-3 mindco-input rounded-3xl px-4 py-3">
         <button className="text-lg text-white/45 transition hover:text-white">＋</button>
 
         <textarea

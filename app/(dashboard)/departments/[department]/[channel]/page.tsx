@@ -18,7 +18,7 @@ export default async function DepartmentChannelPage({params}: DepartmentChannelP
     return (
       <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
         <div className="space-y-6 pb-6">
-          <div className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+          <div className="rounded-[24px] mindco-panel p-6">
             <h1 className="text-2xl font-semibold text-white">Channel not found</h1>
           </div>
         </div>
@@ -31,20 +31,20 @@ export default async function DepartmentChannelPage({params}: DepartmentChannelP
   return (
     <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
       <div className="space-y-6 pb-6">
-      <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+      <section className="rounded-[24px] mindco-panel p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#2EC4B6]">Department Channel</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">#{channelData.title}</h1>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">{channelData.description}</p>
       </section>
 
-      <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
-        <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+      <section className="rounded-[24px] mindco-panel p-6">
+        <div className="flex items-center justify-between gap-4 border-b border-[rgba(129,157,255,0.12)] pb-4">
           <div>
             <p className="text-lg font-semibold text-white">Channel Activity</p>
             <p className="mt-1 text-sm text-white/45">Latest posts and updates from this department channel</p>
           </div>
 
-          <button className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
+          <button className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2 text-sm text-white/70">
             New Post
           </button>
         </div>
@@ -55,7 +55,7 @@ export default async function DepartmentChannelPage({params}: DepartmentChannelP
               <Link
                 key={post.slug}
                 href={`/posts/${post.slug}`}
-                className="block rounded-2xl bg-black/20 p-5 transition hover:bg-black/30"
+                className="block rounded-2xl bg-[rgba(255,255,255,0.035)] p-5 transition hover:bg-[rgba(255,255,255,0.055)]"
               >
                 <p className="text-base font-semibold text-white">{post.title}</p>
                 <p className="mt-2 text-sm text-white/45">

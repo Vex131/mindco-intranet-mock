@@ -16,7 +16,7 @@ export default function CreateContentModal({open, onClose}: CreateContentModalPr
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
-      <div className="w-full max-w-2xl rounded-[28px] border border-white/10 bg-[#171717] p-6 shadow-2xl">
+      <div className="w-full max-w-2xl rounded-[28px] mindco-panel p-6 shadow-2xl">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-[#2EC4B6]">Create</p>
@@ -26,17 +26,17 @@ export default function CreateContentModal({open, onClose}: CreateContentModalPr
 
           <button
             onClick={onClose}
-            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/70"
+            className="mindco-button rounded-xl px-3 py-2 text-sm text-white"
           >
             Close
           </button>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-2 rounded-2xl bg-white/5 p-1">
+        <div className="mt-6 grid grid-cols-2 gap-2 rounded-2xl border border-[rgba(129,157,255,0.12)] bg-white/[0.03] p-1">
           <button
             onClick={() => setTab("post")}
             className={`rounded-xl px-4 py-2.5 text-sm transition ${
-              tab === "post" ? "bg-white/10 text-white" : "text-white/55 hover:text-white"
+              tab === "post" ? "mindco-pill text-white" : "text-white/55 hover:text-white"
             }`}
           >
             Create Post
@@ -44,7 +44,7 @@ export default function CreateContentModal({open, onClose}: CreateContentModalPr
           <button
             onClick={() => setTab("poll")}
             className={`rounded-xl px-4 py-2.5 text-sm transition ${
-              tab === "poll" ? "bg-white/10 text-white" : "text-white/55 hover:text-white"
+              tab === "poll" ? "mindco-pill text-white" : "text-white/55 hover:text-white"
             }`}
           >
             Create Poll
@@ -56,16 +56,16 @@ export default function CreateContentModal({open, onClose}: CreateContentModalPr
             <div>
               <label className="mb-2 block text-sm text-white/70">Post Type</label>
               <div className="grid grid-cols-2 gap-3">
-                <button className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left text-sm text-white">
+                <button className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-3 text-left text-sm text-white">
                   Standard Post
                 </button>
 
                 {role === "Admin" ? (
-                  <button className="rounded-2xl border border-[#FF3B3F]/30 bg-[#FF3B3F]/10 px-4 py-3 text-left text-sm text-white">
+                  <button className="rounded-2xl border border-[rgba(124,108,255,0.34)] bg-[rgba(124,108,255,0.16)] px-4 py-3 text-left text-sm text-white">
                     Official Announcement
                   </button>
                 ) : (
-                  <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white/35">
+                  <div className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-sm text-white/35">
                     Official Announcement (Admin only)
                   </div>
                 )}
@@ -77,13 +77,13 @@ export default function CreateContentModal({open, onClose}: CreateContentModalPr
               <input
                 type="text"
                 placeholder="Enter a post title"
-                className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none placeholder:text-white/30"
+                className="w-full mindco-input rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30"
               />
             </div>
 
             <div>
               <label className="mb-2 block text-sm text-white/70">Audience</label>
-              <select className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none">
+              <select className="mindco-input w-full rounded-2xl px-4 py-3 text-sm text-white">
                 <option>My Department</option>
                 <option>My Team</option>
                 <option>Private Group</option>
@@ -96,13 +96,13 @@ export default function CreateContentModal({open, onClose}: CreateContentModalPr
               <textarea
                 rows={5}
                 placeholder="Write your update..."
-                className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none placeholder:text-white/30"
+                className="w-full mindco-input rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30"
               />
             </div>
 
             <div>
               <label className="mb-2 block text-sm text-white/70">Attachment</label>
-              <div className="rounded-2xl border border-dashed border-white/10 bg-black/20 px-4 py-5 text-sm text-white/35">
+              <div className="rounded-2xl border border-dashed border-[rgba(129,157,255,0.16)] bg-[rgba(255,255,255,0.03)] px-4 py-5 text-sm text-white/35">
                 Upload image, PDF, or file
               </div>
             </div>
@@ -114,13 +114,13 @@ export default function CreateContentModal({open, onClose}: CreateContentModalPr
               <input
                 type="text"
                 placeholder="Enter a poll question"
-                className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none placeholder:text-white/30"
+                className="w-full mindco-input rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30"
               />
             </div>
 
             <div>
               <label className="mb-2 block text-sm text-white/70">Audience</label>
-              <select className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none">
+              <select className="mindco-input w-full rounded-2xl px-4 py-3 text-sm text-white">
                 <option>My Department</option>
                 <option>My Team</option>
                 {role === "Admin" ? <option>Company-wide</option> : null}
@@ -132,24 +132,24 @@ export default function CreateContentModal({open, onClose}: CreateContentModalPr
               <input
                 type="text"
                 placeholder="Option 1"
-                className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none placeholder:text-white/30"
+                className="w-full mindco-input rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30"
               />
               <input
                 type="text"
                 placeholder="Option 2"
-                className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none placeholder:text-white/30"
+                className="w-full mindco-input rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30"
               />
               <input
                 type="text"
                 placeholder="Option 3"
-                className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none placeholder:text-white/30"
+                className="w-full mindco-input rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30"
               />
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-2 block text-sm text-white/70">Visibility</label>
-                <select className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none">
+                <select className="mindco-input w-full rounded-2xl px-4 py-3 text-sm text-white">
                   <option>Visible after voting</option>
                   <option>Visible immediately</option>
                   <option>Visible after poll closes</option>
@@ -158,7 +158,7 @@ export default function CreateContentModal({open, onClose}: CreateContentModalPr
 
               <div>
                 <label className="mb-2 block text-sm text-white/70">Poll Type</label>
-                <select className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white outline-none">
+                <select className="mindco-input w-full rounded-2xl px-4 py-3 text-sm text-white">
                   <option>Single choice</option>
                   <option>Multiple choice</option>
                 </select>
@@ -167,14 +167,14 @@ export default function CreateContentModal({open, onClose}: CreateContentModalPr
           </div>
         )}
 
-        <div className="mt-6 flex items-center justify-end gap-3 border-t border-white/10 pt-5">
+        <div className="mt-6 flex items-center justify-end gap-3 border-t border-[rgba(129,157,255,0.12)] pt-5">
           <button
             onClick={onClose}
-            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/70"
+            className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2.5 text-sm text-white/70"
           >
             Cancel
           </button>
-          <button className="rounded-xl bg-[#FF3B3F] px-4 py-2.5 text-sm font-medium text-white">Publish</button>
+          <button className="rounded-xl bg-[#6675ff] px-4 py-2.5 text-sm font-medium text-white">Publish</button>
         </div>
       </div>
     </div>

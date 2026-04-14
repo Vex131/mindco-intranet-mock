@@ -38,7 +38,7 @@ function BubbleHeader({
     <div className="mb-3 flex items-center gap-3">
       <div
         className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold ${
-          isMine ? "bg-white/10 text-white" : "bg-white/10 text-white"
+          isMine ? "mindco-pill text-white" : "mindco-pill text-white"
         }`}
       >
         {avatarLabel}
@@ -66,7 +66,7 @@ function MessageBody({message}: {message: ThreadMessage}) {
           {message.poll.options.map((option) => (
             <div
               key={option.label}
-              className="rounded-xl border border-white/10 bg-black/20 px-3 py-2 text-sm text-white/80"
+              className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] px-3 py-2 text-sm text-white/80"
             >
               {option.label} · {option.votes} votes
             </div>
@@ -80,7 +80,7 @@ function MessageBody({message}: {message: ThreadMessage}) {
 
   if (message.type === "file" && message.file) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
+      <div className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] p-3">
         <div className="flex items-start gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-sm">📄</div>
 
@@ -95,7 +95,7 @@ function MessageBody({message}: {message: ThreadMessage}) {
 
   if (message.type === "link" && message.link) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
+      <div className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] p-3">
         <p className="text-sm font-medium text-white">{message.link.title}</p>
         <p className="mt-1 text-xs text-white/45">{message.link.url}</p>
       </div>
@@ -134,7 +134,7 @@ function MessageBubble({message}: {message: ThreadMessage}) {
         <MessageBody message={message} />
 
         <div className="mt-4 flex justify-end">
-          <button className="rounded-lg border border-white/10 bg-black/20 px-2.5 py-1 text-[11px] text-white/55 transition hover:text-white">
+          <button className="rounded-lg border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] px-2.5 py-1 text-[11px] text-white/55 transition hover:text-white">
             Reply
           </button>
         </div>
@@ -179,7 +179,7 @@ export default async function MessageThreadPage({params}: MessagePageProps) {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-[18px] border border-white/10 bg-[#18191c]">
-      <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+      <div className="flex items-center justify-between border-b border-[rgba(129,157,255,0.12)] px-4 py-3">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white">
             {activeChat.avatarLabel ?? activeChat.name.charAt(0)}
@@ -198,9 +198,9 @@ export default async function MessageThreadPage({params}: MessagePageProps) {
         </div>
 
         <div className="flex items-center gap-1 text-sm text-white/45">
-          <button className="rounded-xl px-3 py-2 transition hover:bg-white/5 hover:text-white">Search</button>
-          <button className="rounded-xl px-3 py-2 transition hover:bg-white/5 hover:text-white">Files</button>
-          <button className="rounded-xl px-3 py-2 transition hover:bg-white/5 hover:text-white">More</button>
+          <button className="rounded-xl px-3 py-2 transition hover:bg-white/[0.06] hover:text-white">Search</button>
+          <button className="rounded-xl px-3 py-2 transition hover:bg-white/[0.06] hover:text-white">Files</button>
+          <button className="rounded-xl px-3 py-2 transition hover:bg-white/[0.06] hover:text-white">More</button>
         </div>
       </div>
 

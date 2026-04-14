@@ -11,7 +11,7 @@ export default function DirectoryPage() {
   return (
     <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
       <div className="space-y-8 pb-6">
-      <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+      <section className="rounded-[24px] mindco-panel p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#3FA7D6]">People</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">Directory</h1>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
@@ -19,14 +19,14 @@ export default function DirectoryPage() {
         </p>
       </section>
 
-      <section className="rounded-[28px] border border-white/10 bg-[#1A1A1A] p-6">
+      <section className="rounded-[28px] mindco-panel p-6">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {people.map((person) => (
             <article
               key={person.name}
-              className="rounded-3xl border border-white/10 bg-black/20 p-5"
+              className="rounded-3xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] p-5"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#3FA7D6] font-semibold text-white">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[linear-gradient(180deg,#7c6cff,#4e7bff)] font-semibold text-white">
                 {person.name.charAt(0)}
               </div>
               <p className="mt-4 text-lg font-semibold text-white">{person.name}</p>

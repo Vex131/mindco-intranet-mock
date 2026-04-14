@@ -9,7 +9,7 @@ export default function ContentSkeleton({lines = 3, cards = 2}: ContentSkeletonP
       {Array.from({length: cards}).map((_, cardIndex) => (
         <div
           key={cardIndex}
-          className="animate-pulse rounded-[24px] border border-white/10 bg-[#1A1A1A] p-5"
+          className="animate-pulse rounded-[24px] mindco-panel p-5"
         >
           <div className="h-4 w-24 rounded bg-white/10" />
           <div className="mt-4 h-6 w-2/3 rounded bg-white/10" />

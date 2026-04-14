@@ -11,7 +11,7 @@ export default function GalleryPage() {
   return (
     <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
       <div className="space-y-8 pb-6">
-      <section className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-6">
+      <section className="rounded-[24px] mindco-panel p-6">
         <p className="text-sm uppercase tracking-[0.2em] text-[#FF3B3F]">Media</p>
         <h1 className="mt-3 text-3xl font-semibold text-white">Gallery</h1>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-white/60">
@@ -23,7 +23,7 @@ export default function GalleryPage() {
         {items.map((item, index) => (
           <article
             key={item}
-            className="overflow-hidden rounded-[28px] border border-white/10 bg-[#1A1A1A]"
+            className="overflow-hidden rounded-[28px] mindco-panel"
           >
             <div className="h-44 bg-gradient-to-br from-white/10 to-white/0" />
             <div className="p-5">
