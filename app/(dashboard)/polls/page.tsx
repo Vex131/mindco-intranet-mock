@@ -1,132 +1,8 @@
-type SourceType = "feed" | "dm" | "group" | "department";
+"use client";
 
-type PollOptionItem = {
-  label: string;
-  votes: number;
-  percent: number;
-};
-
-type ActivePoll = {
-  id: number;
-  title: string;
-  description: string;
-  status: string;
-  totalVotes: number;
-  closesIn: string;
-  author: string;
-  highlighted?: boolean;
-  sourceType: SourceType;
-  sourceName: string;
-  options: PollOptionItem[];
-};
-
-type ClosedPoll = {
-  id: number;
-  title: string;
-  meta: string;
-  totalVotes: number;
-  sourceType: SourceType;
-  sourceName: string;
-  options: PollOptionItem[];
-};
-
-const activePolls: ActivePoll[] = [
-  {
-    id: 1,
-    title: "What time should the Q2 town hall start?",
-    description:
-      "We’re finalizing the all-hands schedule for next Thursday. Vote for the time that works best for your team.",
-    status: "Closing soon",
-    totalVotes: 42,
-    closesIn: "Closes today • 5:00 PM",
-    author: "Leadership",
-    highlighted: true,
-    sourceType: "feed",
-    sourceName: "My Feed",
-    options: [
-      {label: "9:00 AM", votes: 12, percent: 29},
-      {label: "11:00 AM", votes: 18, percent: 43},
-      {label: "2:00 PM", votes: 12, percent: 29},
-    ],
-  },
-  {
-    id: 2,
-    title: "Should the team lunch happen this Friday?",
-    description: "Help us decide whether to lock in the lunch booking for this week.",
-    status: "Open",
-    totalVotes: 18,
-    closesIn: "2 days left",
-    author: "Aisha Rafi",
-    sourceType: "dm",
-    sourceName: "Direct Message",
-    options: [
-      {label: "Yes", votes: 10, percent: 56},
-      {label: "No", votes: 4, percent: 22},
-      {label: "Need more details", votes: 4, percent: 22},
-    ],
-  },
-  {
-    id: 3,
-    title: "Preferred onboarding format for new hires?",
-    description: "We’re refining the first-week experience for incoming team members.",
-    status: "Open",
-    totalVotes: 27,
-    closesIn: "4 days left",
-    author: "HR Working Group",
-    sourceType: "group",
-    sourceName: "Private Group",
-    options: [
-      {label: "In-person", votes: 8, percent: 30},
-      {label: "Hybrid", votes: 13, percent: 48},
-      {label: "Self-paced digital", votes: 6, percent: 22},
-    ],
-  },
-  {
-    id: 4,
-    title: "Preferred release review window?",
-    description: "Engineering leads are aligning on a review window for the next release cycle.",
-    status: "Open",
-    totalVotes: 31,
-    closesIn: "1 day left",
-    author: "Engineering Leads",
-    sourceType: "department",
-    sourceName: "Engineering",
-    options: [
-      {label: "Tuesday morning", votes: 7, percent: 23},
-      {label: "Wednesday afternoon", votes: 15, percent: 48},
-      {label: "Friday morning", votes: 9, percent: 29},
-    ],
-  },
-];
-
-const closedPolls: ClosedPoll[] = [
-  {
-    id: 5,
-    title: "Preferred release review window?",
-    meta: "Closed yesterday • 31 votes",
-    totalVotes: 31,
-    sourceType: "department",
-    sourceName: "Engineering",
-    options: [
-      {label: "Tuesday morning", votes: 7, percent: 23},
-      {label: "Wednesday afternoon", votes: 15, percent: 48},
-      {label: "Friday morning", votes: 9, percent: 29},
-    ],
-  },
-  {
-    id: 6,
-    title: "Best topic for the next wellness session?",
-    meta: "Closed 2 days ago • 24 votes",
-    totalVotes: 24,
-    sourceType: "group",
-    sourceName: "Private Group",
-    options: [
-      {label: "Stress management", votes: 11, percent: 46},
-      {label: "Ergonomics at work", votes: 8, percent: 33},
-      {label: "Sleep and recovery", votes: 5, percent: 21},
-    ],
-  },
-];
+import {useState} from "react";
+import type {ActivePoll, ClosedPoll, PollOptionItem, SourceType, VoteVisibility} from "@/lib/mock-data";
+import {activePolls, closedPolls} from "@/lib/mock-data";
 
 function PollOption({label, votes, percent}: PollOptionItem) {
   return (
@@ -172,7 +48,87 @@ function SourceBadge({sourceType, sourceName}: {sourceType: SourceType; sourceNa
   return <span className={`rounded-full border px-3 py-1 text-xs font-medium ${styles}`}>{sourceName}</span>;
 }
 
-function PollCard({poll}: {poll: ActivePoll}) {
+function VoteVisibilityBadge({voteVisibility}: {voteVisibility: VoteVisibility}) {
+  return (
+    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/65">
+      {voteVisibility === "public" ? "Public votes" : "Anonymous votes"}
+    </span>
+  );
+}
+
+function PollResultsModal({
+  open,
+  onClose,
+  poll,
+}: {
+  open: boolean;
+  onClose: () => void;
+  poll: ActivePoll | ClosedPoll | null;
+}) {
+  if (!open || !poll) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
+      <div className="w-full max-w-2xl rounded-[28px] border border-white/10 bg-[#171717] p-6 shadow-2xl">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-sm uppercase tracking-[0.2em] text-[#5B7CFA]">Vote Details</p>
+            <h2 className="mt-2 text-2xl font-semibold text-white">{poll.title}</h2>
+            <p className="mt-2 text-sm text-white/55">
+              {poll.voteVisibility === "public"
+                ? "Visible voters by option"
+                : "This poll is anonymous. Voter identities are hidden."}
+            </p>
+          </div>
+
+          <button
+            onClick={onClose}
+            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/70 hover:bg-white/10"
+          >
+            Close
+          </button>
+        </div>
+
+        <div className="mt-6 space-y-4">
+          {poll.options.map((option) => (
+            <div
+              key={option.label}
+              className="rounded-2xl border border-white/10 bg-black/20 p-4"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-sm font-medium text-white">{option.label}</p>
+                <p className="text-xs text-white/50">
+                  {option.votes} votes • {option.percent}%
+                </p>
+              </div>
+
+              {poll.voteVisibility === "public" ? (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {option.voters?.length ? (
+                    option.voters.map((voter) => (
+                      <span
+                        key={voter.id}
+                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-white/65"
+                      >
+                        {voter.name}
+                      </span>
+                    ))
+                  ) : (
+                    <p className="text-xs text-white/40">No voter details available</p>
+                  )}
+                </div>
+              ) : (
+                <p className="mt-3 text-xs text-white/40">Voter identities hidden</p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PollCard({poll, onShowResults}: {poll: ActivePoll; onShowResults: (poll: ActivePoll) => void}) {
   return (
     <article
       className={`rounded-[28px] border p-6 ${
@@ -195,6 +151,7 @@ function PollCard({poll}: {poll: ActivePoll}) {
               sourceType={poll.sourceType}
               sourceName={poll.sourceName}
             />
+            <VoteVisibilityBadge voteVisibility={poll.voteVisibility} />
           </div>
 
           <h2 className="mt-4 text-xl font-semibold text-white">{poll.title}</h2>
@@ -228,6 +185,16 @@ function PollCard({poll}: {poll: ActivePoll}) {
         <button className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10">
           Open post
         </button>
+
+        {poll.voteVisibility === "public" ? (
+          <button
+            onClick={() => onShowResults(poll)}
+            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10"
+          >
+            Show voters
+          </button>
+        ) : null}
+
         <button className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10">
           Share
         </button>
@@ -236,9 +203,65 @@ function PollCard({poll}: {poll: ActivePoll}) {
   );
 }
 
+function ClosedPollCard({poll, onShowResults}: {poll: ClosedPoll; onShowResults: (poll: ClosedPoll) => void}) {
+  return (
+    <article className="rounded-2xl border border-white/10 bg-black/20 p-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <StatusBadge status="Closed" />
+          <SourceBadge
+            sourceType={poll.sourceType}
+            sourceName={poll.sourceName}
+          />
+          <VoteVisibilityBadge voteVisibility={poll.voteVisibility} />
+        </div>
+      </div>
+
+      <p className="mt-4 text-base font-semibold text-white">{poll.title}</p>
+      <p className="mt-2 text-sm text-white/50">{poll.meta}</p>
+      <p className="mt-2 text-sm text-white/55">{poll.totalVotes} total votes</p>
+
+      <div className="mt-4 space-y-3">
+        {poll.options.map((option) => (
+          <PollOption
+            key={option.label}
+            label={option.label}
+            votes={option.votes}
+            percent={option.percent}
+          />
+        ))}
+      </div>
+
+      <div className="mt-5 border-t border-white/10 pt-4">
+        {poll.voteVisibility === "public" ? (
+          <button
+            onClick={() => onShowResults(poll)}
+            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/75 hover:bg-white/10"
+          >
+            Show voters
+          </button>
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
 export default function PollsPage() {
   const featuredPoll = activePolls.find((poll) => poll.highlighted);
   const regularPolls = activePolls.filter((poll) => !poll.highlighted);
+
+  const [selectedPoll, setSelectedPoll] = useState<ActivePoll | ClosedPoll | null>(null);
+  const [resultsOpen, setResultsOpen] = useState(false);
+
+  const handleShowResults = (poll: ActivePoll | ClosedPoll) => {
+    setSelectedPoll(poll);
+    setResultsOpen(true);
+  };
+
+  const handleCloseResults = () => {
+    setResultsOpen(false);
+    setSelectedPoll(null);
+  };
 
   return (
     <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
@@ -287,13 +310,19 @@ export default function PollsPage() {
           ))}
         </section>
 
-        {featuredPoll ? <PollCard poll={featuredPoll} /> : null}
+        {featuredPoll ? (
+          <PollCard
+            poll={featuredPoll}
+            onShowResults={handleShowResults}
+          />
+        ) : null}
 
         <section className="space-y-5">
           {regularPolls.map((poll) => (
             <PollCard
               key={poll.id}
               poll={poll}
+              onShowResults={handleShowResults}
             />
           ))}
         </section>
@@ -311,39 +340,21 @@ export default function PollsPage() {
 
           <div className="mt-5 grid gap-4 xl:grid-cols-2">
             {closedPolls.map((poll) => (
-              <article
+              <ClosedPollCard
                 key={poll.id}
-                className="rounded-2xl border border-white/10 bg-black/20 p-5"
-              >
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <StatusBadge status="Closed" />
-                    <SourceBadge
-                      sourceType={poll.sourceType}
-                      sourceName={poll.sourceName}
-                    />
-                  </div>
-                </div>
-
-                <p className="mt-4 text-base font-semibold text-white">{poll.title}</p>
-                <p className="mt-2 text-sm text-white/50">{poll.meta}</p>
-                <p className="mt-2 text-sm text-white/55">{poll.totalVotes} total votes</p>
-
-                <div className="mt-4 space-y-3">
-                  {poll.options.map((option) => (
-                    <PollOption
-                      key={option.label}
-                      label={option.label}
-                      votes={option.votes}
-                      percent={option.percent}
-                    />
-                  ))}
-                </div>
-              </article>
+                poll={poll}
+                onShowResults={handleShowResults}
+              />
             ))}
           </div>
         </section>
       </div>
+
+      <PollResultsModal
+        open={resultsOpen}
+        onClose={handleCloseResults}
+        poll={selectedPoll}
+      />
     </div>
   );
 }
