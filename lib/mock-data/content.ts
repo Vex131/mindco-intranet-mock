@@ -229,8 +229,8 @@ export const notifications = [
   {
     id: 5,
     type: "poll",
-    title: "Poll update: Town hall preferred time?",
-    description: "42 votes so far. Results are visible after voting.",
+    title: "Poll update: What time should the Q2 town hall start?",
+    description: "9 votes so far. Public vote details are visible in the poll.",
     time: "2 hours ago",
     unread: false,
     href: "/polls",
