@@ -132,11 +132,12 @@ function PollResultsModal({
   );
 }
 
-function isHrPoll(poll: ActivePoll) {
-  return poll.author.toLowerCase() === "hr" || poll.sourceName.toLowerCase().includes("hr");
+function isHrPoll(poll: ActivePoll | ClosedPoll) {
+  const author = "author" in poll ? poll.author : "";
+  return author.toLowerCase() === "hr" || poll.sourceName.toLowerCase().includes("hr");
 }
 
-function isDepartmentPoll(poll: ActivePoll, currentUserDepartment: string) {
+function isDepartmentPoll(poll: ActivePoll | ClosedPoll, currentUserDepartment: string) {
   return (
     poll.sourceType === "department" && poll.sourceName.toLowerCase().includes(currentUserDepartment.toLowerCase())
   );
@@ -206,9 +207,11 @@ function PollCard({
 
   return (
     <article className={`rounded-[24px] border p-4 ${getActivePollCardStyle(poll, currentUserDepartment)}`}>
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="max-w-3xl">
-          <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0 flex-1 lg:max-w-[48%]">
+          <h2 className="text-lg font-semibold text-white">{poll.title}</h2>
+
+          <div className="mt-2 flex flex-wrap items-center gap-2">
             {highlightLabel ? (
               <span className={`rounded-full border px-3 py-1 text-xs font-medium ${highlightLabel.className}`}>
                 {highlightLabel.text}
@@ -223,50 +226,46 @@ function PollCard({
             <VoteVisibilityBadge voteVisibility={poll.voteVisibility} />
           </div>
 
-          <h2 className="mt-3 text-lg font-semibold text-white">{poll.title}</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-white/60">{poll.description}</p>
+          <p className="mt-3 text-sm leading-6 text-white/60">{poll.description}</p>
+
+          <div className="mt-4 flex flex-wrap gap-2 text-sm text-white/55">
+            <span>{poll.totalVotes} total votes</span>
+            <span className="text-white/20">•</span>
+            <span>{poll.closesIn}</span>
+          </div>
+
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <button className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-3 py-2 text-sm text-white/75 transition hover:bg-white/10">
+              Open post
+            </button>
+
+            {poll.voteVisibility === "public" ? (
+              <button
+                onClick={() => onShowResults(poll)}
+                className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-3 py-2 text-sm text-white/75 transition hover:bg-white/10"
+              >
+                Show voters
+              </button>
+            ) : null}
+
+            <button className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-3 py-2 text-sm text-white/75 transition hover:bg-white/10">
+              Share
+            </button>
+          </div>
         </div>
 
-        <div className="rounded-2xl border border-[rgba(129,157,255,0.14)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-right">
-          <p className="text-xs uppercase tracking-[0.18em] text-white/35">Posted by</p>
-          <p className="mt-1 text-sm font-medium text-white">{poll.author}</p>
+        <div className="w-full lg:w-[44%]">
+          <div className="space-y-2">
+            {poll.options.map((option) => (
+              <PollOption
+                key={option.label}
+                label={option.label}
+                votes={option.votes}
+                percent={option.percent}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="mt-4 flex flex-wrap gap-2 text-sm text-white/55">
-        <span>{poll.totalVotes} total votes</span>
-        <span className="text-white/20">•</span>
-        <span>{poll.closesIn}</span>
-      </div>
-
-      <div className="mt-4 space-y-2">
-        {poll.options.map((option) => (
-          <PollOption
-            key={option.label}
-            label={option.label}
-            votes={option.votes}
-            percent={option.percent}
-          />
-        ))}
-      </div>
-
-      <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-[rgba(129,157,255,0.12)] pt-4">
-        <button className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10">
-          Open post
-        </button>
-
-        {poll.voteVisibility === "public" ? (
-          <button
-            onClick={() => onShowResults(poll)}
-            className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10"
-          >
-            Show voters
-          </button>
-        ) : null}
-
-        <button className="rounded-xl border border-[rgba(129,157,255,0.14)] bg-white/[0.04] px-4 py-2.5 text-sm text-white/75 transition hover:bg-white/10">
-          Share
-        </button>
       </div>
     </article>
   );
@@ -276,8 +275,9 @@ function ArchivedPollCard({poll}: {poll: ClosedPoll}) {
   return (
     <article className="rounded-[24px] border border-white/10 bg-[#1A1A1A] p-4">
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="max-w-3xl">
+        <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
+            <h2 className="text-lg font-semibold text-white">{poll.title}</h2>
             <StatusBadge status="Archived" />
             <SourceBadge
               sourceType={poll.sourceType}
@@ -286,16 +286,15 @@ function ArchivedPollCard({poll}: {poll: ClosedPoll}) {
             <VoteVisibilityBadge voteVisibility={poll.voteVisibility} />
           </div>
 
-          <h2 className="mt-3 text-lg font-semibold text-white">{poll.title}</h2>
-          <p className="mt-2 text-sm text-white/50">{poll.meta}</p>
+          <p className="mt-2 line-clamp-2 text-sm text-white/50">{poll.meta}</p>
+
+          <div className="mt-3 text-sm text-white/50">
+            <span>{poll.totalVotes} total votes</span>
+          </div>
         </div>
       </div>
 
-      <div className="mt-4 text-sm text-white/50">
-        <span>{poll.totalVotes} total votes</span>
-      </div>
-
-      <div className="mt-4 space-y-2">
+      <div className="mt-4 grid gap-2 md:grid-cols-2 xl:grid-cols-3">
         {poll.options.map((option) => (
           <PollOption
             key={option.label}
@@ -304,10 +303,6 @@ function ArchivedPollCard({poll}: {poll: ClosedPoll}) {
             percent={option.percent}
           />
         ))}
-      </div>
-
-      <div className="mt-4 border-t border-[rgba(129,157,255,0.12)] pt-4">
-        <p className="text-sm text-white/35">Archived poll — no longer interactive</p>
       </div>
     </article>
   );
@@ -364,10 +359,11 @@ export default function PollsPage() {
   return (
     <div className="h-full min-h-0 overflow-y-auto pr-2 chat-scrollbar">
       <div className="space-y-8 pb-6">
-        <section className="rounded-[24px] mindco-panel p-6">
-          <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
+        <section className="px-1 pt-1">
+          <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
             <div>
-              <h1 className="text-3xl font-semibold text-white">Polls</h1>
+              <h1 className="text-[2.1rem] font-semibold tracking-[-0.02em] text-white">Polls</h1>
+              <p className="mt-1 text-sm text-white/40">Active and archived poll posts</p>
             </div>
 
             <div className="flex w-full flex-col gap-3 xl:max-w-3xl xl:flex-row xl:justify-end">

@@ -9,7 +9,7 @@ const workspaceNav = [
   {label: "Home", href: "/home"},
   {label: "Announcements", href: "/announcements"},
   {label: "My Feed", href: "/feed"},
-  {label: "Polls", href: "/polls"},
+  {label: "Polls", href: "/polls3"},
   {label: "Directory", href: "/directory"},
 ];
 
