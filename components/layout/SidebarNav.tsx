@@ -10,6 +10,8 @@ const workspaceNav = [
   {label: "Announcements", href: "/announcements"},
   {label: "My Feed", href: "/feed"},
   {label: "Polls", href: "/polls"},
+  {label: "Polls2", href: "/polls2"},
+  {label: "Polls3", href: "/polls3"},
   {label: "Directory", href: "/directory"},
 ];
 
